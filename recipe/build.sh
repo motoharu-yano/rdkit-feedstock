@@ -23,14 +23,16 @@ cmake ${CMAKE_ARGS} \
     -D Boost_NO_BOOST_CMAKE=ON \
     -D PYTHON_EXECUTABLE="$PYTHON" \
     -D PYTHON_INSTDIR="$SP_DIR" \
+    -D RDK_BUILD_PYTHON_WRAPPERS=TRUE \
     -D RDK_BUILD_AVALON_SUPPORT=ON \
     -D RDK_BUILD_CAIRO_SUPPORT=ON \
-    -D RDK_BUILD_CPP_TESTS=OFF \
+    -D RDK_BUILD_CPP_TESTS=ON \
     -D RDK_BUILD_INCHI_SUPPORT=ON \
     -D RDK_BUILD_FREESASA_SUPPORT=ON \
     -D RDK_BUILD_YAEHMOP_SUPPORT=ON \
-    -D RDK_INSTALL_INTREE=OFF \
     -D RDK_INSTALL_STATIC_LIBS=OFF \
+    -D RDK_INSTALL_DEV_COMPONENT=OFF \
+    -D RDK_INSTALL_INTREE=OFF \
     -D RDK_OPTIMIZE_POPCNT=${POPCNT_OPTIMIZATION} \
     ${EXTRA_CMAKE_FLAGS} \
     .
@@ -38,8 +40,7 @@ cmake ${CMAKE_ARGS} \
 make -j$CPU_COUNT
 make install
 
-## How to run unit tests:
-## 1. Set RDK_BUILD_CPP_TESTS to ON
-## 2. Uncomment lines below
-# export RDBASE="$SRC_DIR"
-# ctest --output-on-failure
+export RDBASE="$SRC_DIR"
+export PYTHONPATH="$SRC_DIR"
+
+ctest --output-on-failure -j$CPU_COUNT
