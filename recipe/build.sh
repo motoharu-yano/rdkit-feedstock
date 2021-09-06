@@ -26,7 +26,7 @@ cmake ${CMAKE_ARGS} \
     -D RDK_BUILD_PYTHON_WRAPPERS=TRUE \
     -D RDK_BUILD_AVALON_SUPPORT=ON \
     -D RDK_BUILD_CAIRO_SUPPORT=ON \
-    -D RDK_BUILD_CPP_TESTS=ON \
+    -D RDK_BUILD_CPP_TESTS=OFF \
     -D RDK_BUILD_INCHI_SUPPORT=ON \
     -D RDK_BUILD_FREESASA_SUPPORT=ON \
     -D RDK_BUILD_YAEHMOP_SUPPORT=ON \
@@ -40,7 +40,7 @@ cmake ${CMAKE_ARGS} \
 make -j$CPU_COUNT
 make install
 
-export RDBASE="$SRC_DIR"
-export PYTHONPATH="$SRC_DIR"
+#export RDBASE="$SRC_DIR"
+#export PYTHONPATH="$SRC_DIR"
 
-ctest --output-on-failure -j$CPU_COUNT
+#ctest --output-on-failure -j$CPU_COUNT
