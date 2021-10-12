@@ -21,9 +21,11 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - cmake
-    - jom   [win]
-    - make   [unix]
-    - pkg-config   [unix]
+    - jom  # [win]
+    - make  # [unix]
+    - pkg-config  # [unix]
+    - gxx_linux-64
+    - sysroot_linux-64=2.17 # [unix]
   host:
     - python {{ python }}
     - boost {{ boost }}
@@ -65,13 +67,13 @@ test:
 outputs:
   - name: rdkit
   - name: rdkit-dev
-    script: install_rdkit_dev.bat   [win]
+    script: install_rdkit_dev.bat  # [win]
     requirements:
       run:
         - rdkit
     test:
       commands:
-        - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1   [win]
+        - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1  # [win]
     about:
       summary: RDKit headers and library used in rdkit package
       license: BSD-3-Clause
